@@ -31,7 +31,7 @@ export const databaseProviders = [
             Deal.belongsTo(Card)
             
             // card
-            Card.belongsTo(User)
+            Card.belongsTo(Account);
             Card.hasMany(Deal)
 
             await sequelize.sync({force: true})

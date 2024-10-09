@@ -13,12 +13,6 @@ export class Card extends Model {
     @Column
     numberCard: number
 
-    @Column(DataType.DECIMAL(3,0))
-    cvv: number
-
-    @Column
-    expirationDate: Date
-
     @Column(DataType.DECIMAL(4,0))
     pin: number
 }

@@ -1,7 +1,7 @@
 import { Card } from "./cards.entity";
 
 
-export const cardsProviders = [
+export const CardsProviders = [
   {
     provide: 'CARD_REPOSITORY',
     useValue: Card,
