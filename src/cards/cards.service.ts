@@ -12,16 +12,19 @@ export class CardsService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async create(cardData: ICard & { accountId: number }): Promise<Card> {
-    const account = await this.accountRepository.findOne({ where: { id: cardData.accountId } });
+  async create(card: ICard): Promise<Card> {
+    const account = await this.accountRepository.findOne({ where: { id: card.accountId } });
     if (!account) {
       throw new NotFoundException('Account not found');
     }
 
-    return await this.cardRepository.create<Card>({ ...cardData });
+    return await this.cardRepository.create<Card>(
+        { ...card,
+        AccountId: card.accountId
+     });
 }
 
-  async authenticate(cardId: number, pin: number): Promise<{ token: string; account: Account }> {
+  async authenticate(cardId: number, pin: number): Promise<{ token: string }> {
     const card = await this.cardRepository.findOne({
       where: { cardId: cardId, pin },
       include: [Account],
@@ -32,7 +35,7 @@ export class CardsService {
     }
 
     const account = await this.accountRepository.findOne({
-      where: { id: card['accountId'] },
+      where: { id: card['AccountId'] },
       include: [{ all: true }],
     });
 
@@ -43,6 +46,6 @@ export class CardsService {
     const payload = { accountId: account.id };
     const token = this.jwtService.sign(payload);
 
-    return { token, account };
+    return { token };
   }
 }

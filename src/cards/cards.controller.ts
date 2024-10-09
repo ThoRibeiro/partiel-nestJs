@@ -9,17 +9,17 @@ export class CardsController {
   constructor(private readonly cardsService: CardsService) {}
 
   @Post('create')
-  async create(@Body('card') cardData: ICard & { accountId: number }): Promise<Card> {
+  async create(@Body('card') cardData: ICard): Promise<Card> {
     return this.cardsService.create(cardData);
   }
 
   @Post('auth')
   async authenticate(
-    @Body('card') cardData: { numberCard: number; pin: number },
-  ): Promise<{ token: string; account: Account }> {
-    const { numberCard, pin } = cardData;
+    @Body('card') cardData: { cardId: number; pin: number },
+  ): Promise<{ token: string}> {
+    const { cardId, pin } = cardData;
     try {
-      return await this.cardsService.authenticate(numberCard, pin);
+      return await this.cardsService.authenticate(cardId, pin);
     } catch (error) {
       throw new UnauthorizedException(error.message);
     }
