@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Param, Post, Put } from '@nestjs/common';
 import { AccountsService } from './accounts.service';
 import { IAccount } from './accounts.interface';
 import { Account } from './accounts.entity';
@@ -12,5 +12,13 @@ export class AccountsController {
     @Body('account') accountData: IAccount,
   ): Promise<Account> {
     return this.accountService.createAccount(accountData);
+  }
+
+  @Put(':id')
+  async updateAccount(
+    @Param('id') id: number,
+    @Body('account') accountData: IAccount,
+  ): Promise<Account> {
+    return this.accountService.updateAccount(id, accountData);
   }
 }

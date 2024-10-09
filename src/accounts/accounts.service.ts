@@ -47,4 +47,38 @@ export class AccountsService {
     const account = new Account({ ...accountData });
     return account.save();
   }
+
+  async updateAccount(id: number, accountData: IAccount): Promise<Account> {
+    const account = await Account.findByPk(id);
+
+    if (!account) {
+      throw Error('Compte non trouvé'); // Si le compte n'existe pas
+    }
+
+    if (accountData.label === 'LIVRET_A' && accountData.numberCard > 0) {
+      throw new BadRequestException(
+        'Les livrets A ne peuvent pas avoir de carte bleue.',
+      );
+    }
+    if (
+      accountData.accountNumber !== undefined ||
+      accountData.label !== undefined
+    ) {
+      throw new BadRequestException(
+        'La mise à jour de accountNumber et label est interdite.',
+      ); // Impossible de modifier
+    }
+
+    if (accountData.amount !== undefined) {
+      account.amount = accountData.amount;
+    }
+
+    if (accountData.numberCard !== undefined) {
+      account.numberCard = accountData.numberCard;
+    }
+
+    await account.save();
+
+    return account;
+  }
 }
