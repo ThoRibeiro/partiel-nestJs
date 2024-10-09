@@ -1,4 +1,4 @@
-# Projet Platinium Bank - API de Gestion Bancaire
+# Projet Platinium Bank - API de Gestion Bancaire GROUPE n°6
 
 ## Description
 Cette API est développée avec NestJS pour simuler les fonctionnalités d'une banque en ligne fictive, Platinium Bank. Elle permet la gestion des utilisateurs, des comptes bancaires, et des cartes bancaires, ainsi que la simulation des opérations via un Distributeur Automatique de Billets (DAB).
