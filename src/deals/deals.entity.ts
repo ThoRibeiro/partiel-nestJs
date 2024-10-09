@@ -7,6 +7,7 @@ import {
   Unique,
   AutoIncrement,
 } from 'sequelize-typescript';
+import { EDealType } from './deal.enum';
 
 @Table
 export class Deal extends Model {
@@ -21,4 +22,7 @@ export class Deal extends Model {
 
   @Column
   date: Date;
+
+  @Column
+  type: EDealType;
 }

@@ -6,4 +6,6 @@ export interface IAccount {
   label: EAccountLabel;
   amount: number;
   numberCard: number;
+  userId: number;
+  cardId: number;
 }
