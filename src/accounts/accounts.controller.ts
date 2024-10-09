@@ -23,7 +23,7 @@ export class AccountsController {
   }
 
   @Get(':userId/deals')
-  async getLastOperations(@Param('userId') userId: number) {
+  async getDeals(@Param('userId') userId: number) {
     return this.accountService.getLastDeals(userId);
   }
 }
