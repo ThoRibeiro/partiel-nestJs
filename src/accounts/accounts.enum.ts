@@ -1,6 +1,6 @@
 export enum EAccountLabel {
-    CURRENT = "Courant",
-    LIVRET_A = "Livret A",
-    PROFESSIONAL = "Professionel",
-    COMMON = "Commun"
+  CURRENT = 'CURRENT',
+  LIVRET_A = 'LIVRET_A',
+  PROFESSIONAL = 'PROFESSIONAL',
+  COMMON = 'COMMON',
 }
