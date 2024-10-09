@@ -1,7 +1,6 @@
 export interface ICard {
   id: number;
-  numberCard: number;
-  cvv: number;
+  cardId: number;
   pin: number;
   accountId: number;
 }

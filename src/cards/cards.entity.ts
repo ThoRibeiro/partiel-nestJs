@@ -1,4 +1,5 @@
-import { Column, PrimaryKey, Model, Table, DataType, Unique, AutoIncrement } from "sequelize-typescript";
+import { Column, PrimaryKey, Model, Table, DataType, Unique, AutoIncrement, ForeignKey } from "sequelize-typescript";
+import { Account } from "src/accounts/accounts.entity";
 
 
 @Table
@@ -11,7 +12,7 @@ export class Card extends Model {
 
     @Unique
     @Column
-    numberCard: number
+    cardId: number
 
     @Column(DataType.DECIMAL(4,0))
     pin: number

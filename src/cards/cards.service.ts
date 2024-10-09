@@ -13,19 +13,17 @@ export class CardsService {
   ) {}
 
   async create(cardData: ICard & { accountId: number }): Promise<Card> {
-    const { accountId, numberCard, pin } = cardData;
-
-    const account = await this.accountRepository.findOne({ where: { id: accountId } });
+    const account = await this.accountRepository.findOne({ where: { id: cardData.accountId } });
     if (!account) {
       throw new NotFoundException('Account not found');
     }
 
-    return await this.cardRepository.create<Card>({...Card});
-  }
+    return await this.cardRepository.create<Card>({ ...cardData });
+}
 
-  async authenticate(cardNumber: number, pin: number): Promise<{ token: string; account: Account }> {
+  async authenticate(cardId: number, pin: number): Promise<{ token: string; account: Account }> {
     const card = await this.cardRepository.findOne({
-      where: { numberCard: cardNumber, pin },
+      where: { cardId: cardId, pin },
       include: [Account],
     });
 
